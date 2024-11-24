@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wlang Interpreter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+        }
+
+        textarea {
+            width: 50%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .commands {
+            width: 40%;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .examples {
+            margin-top: 30px;
+            width: 80%;
+        }
+
+        .example {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+
+        .example h4 {
+            margin-top: 0;
+        }
+
+        .example pre {
+            margin: 0;
+            background-color: #fff;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wlang Interpreter</h1>
+    <div class="container">
+        <!-- Code input area -->
+        <textarea id="code" placeholder="Write your Wlang code here..."></textarea>
+
+        <!-- Command sheet -->
+        <div class="commands">
+            <h3>Wlang Commands</h3>
+            <ul>
+                <li><strong>🙄😒😡😡😡😡</strong>: Increment memory</li>
+                <li><strong>Clean your teeth, bro</strong>: Decrement memory</li>
+                <li><strong>WTF is this, bro?</strong>: Output memory</li>
+                <li><strong>Green screen kid 😂</strong>: Prompt for input</li>
+                <li><strong>bruh</strong>: No operation (does nothing)</li>
+                <li><strong>The bug is gay because I saw it</strong>: Ignored command</li>
+            </ul>
+        </div>
+    </div>
+    <button onclick="runWlangCode()">Run Code</button>
+    <pre id="output"></pre>
+
+    <!-- Example codes -->
+    <div class="examples">
+        <h3>Example Wlang Programs</h3>
+
+        <div class="example">
+            <h4>1. Basic Increment and Output</h4>
+            <pre>
+🙄😒😡😡😡😡
+🙄😒😡😡😡😡
+WTF is this, bro?
+            </pre>
+        </div>
+
+        <div class="example">
+            <h4>2. Decrement and Output</h4>
+            <pre>
+🙄😒😡😡😡😡
+🙄😒😡😡😡😡
+Clean your teeth, bro
+WTF is this, bro?
+            </pre>
+        </div>
+
+        <div class="example">
+            <h4>3. Take User Input and Output</h4>
+            <pre>
+Green screen kid 😂
+WTF is this, bro?
+            </pre>
+        </div>
+
+        <div class="example">
+            <h4>4. Ignore No-Op Commands</h4>
+            <pre>
+🙄😒😡😡😡😡
+bruh
+🙄😒😡😡😡😡
+The bug is gay because I saw it
+WTF is this, bro?
+            </pre>
+        </div>
+
+        <div class="example">
+            <h4>5. Input, Add to Memory, and Output</h4>
+            <pre>
+Green screen kid 😂
+🙄😒😡😡😡😡
+🙄😒😡😡😡😡
+WTF is this, bro?
+            </pre>
+        </div>
+    </div>
+
+    <script>
+        function runWlangCode() {
+            const code = document.getElementById("code").value; // Get the Wlang code
+            let memory = 0; // A single memory variable to store an integer
+            let output = ""; // Stores the output to display in the <pre> tag
+
+            // Split the input code into lines (commands separated by newlines)
+            const lines = code.split("\n");
+
+            // Loop through each line and interpret it
+            for (let line of lines) {
+                line = line.trim(); // Remove unnecessary whitespace
+
+                switch (line) {
+                    case "🙄😒😡😡😡😡":
+                        memory++;
+                        break;
+
+                    case "Clean your teeth, bro":
+                        memory--;
+                        break;
+
+                    case "WTF is this, bro?":
+                        output += memory + "\n";
+                        break;
+
+                    case "Green screen kid 😂":
+                        let inputValue = prompt("Enter a number:");
+                        if (!isNaN(inputValue)) {
+                            memory = parseInt(inputValue, 10); // Convert input to integer
+                        } else {
+                            alert("Invalid input. Memory set to 0.");
+                            memory = 0; // Reset memory if input is invalid
+                        }
+                        break;
+
+                    case "bruh":
+                        // Does nothing, bruh.
+                        break;
+
+                    default:
+                        // The bug is gay because I saw it: Unrecognized command ignored
+                        break;
+                }
+            }
+
+            // Display the output in the <pre> element
+            document.getElementById("output").textContent = output;
+        }
+    </script>
+</body>
+</html>
